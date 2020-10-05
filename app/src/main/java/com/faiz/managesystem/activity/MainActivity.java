@@ -8,6 +8,7 @@ import androidx.viewpager.widget.ViewPager;
 import android.os.Bundle;
 import android.view.MenuItem;
 
+import com.baidu.mapapi.SDKInitializer;
 import com.faiz.managesystem.R;
 import com.faiz.managesystem.adapter.ViewPagerAdapter;
 import com.faiz.managesystem.fragment.BaseFragment;

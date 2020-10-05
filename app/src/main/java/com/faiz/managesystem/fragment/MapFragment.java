@@ -11,17 +11,15 @@ import android.widget.TextView;
 
 
 import androidx.annotation.Nullable;
-import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
 
-import com.baidu.mapapi.map.BaiduMap;
-
+import com.baidu.location.LocationClientOption;
+import com.baidu.mapapi.SDKInitializer;
 import com.baidu.mapapi.map.MapView;
-
 import com.faiz.managesystem.R;
 
 import java.util.ArrayList;
@@ -33,14 +31,17 @@ public class MapFragment extends BaseFragment {
 public LocationClient mLocationClient;
 private TextView tvPosition;
 
+private MapView mapView;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-
+        SDKInitializer.initialize(getContext().getApplicationContext());
         mLocationClient = new LocationClient(getContext().getApplicationContext());
         mLocationClient.registerLocationListener(new MyLocationListener());
         View view = inflater.inflate(R.layout.fragment_map, container, false);
         tvPosition = view.findViewById(R.id.tv_position);
+        mapView = (MapView) view.findViewById(R.id.map_view);
         return view;
     }
 
@@ -74,6 +75,7 @@ private TextView tvPosition;
 
 //    请求位置信息
     private void requestLocation(){
+        initLocation();
         mLocationClient.start();
     }
 
@@ -101,5 +103,31 @@ private TextView tvPosition;
         }
     }
 
+//    刷新当前位置
+    private void initLocation(){
+        LocationClientOption option = new LocationClientOption();
+        option.setScanSpan(5000);
+        option.setLocationMode(LocationClientOption.LocationMode.Device_Sensors);
+        option.setIsNeedAddress(true);
+        mLocationClient.setLocOption(option);
+    }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        mapView.onResume();
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        mapView.onPause();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        mLocationClient.stop();
+        mapView.onDestroy();
+    }
 }
