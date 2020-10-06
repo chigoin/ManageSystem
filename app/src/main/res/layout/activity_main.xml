@@ -17,7 +17,7 @@
 <!--        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"/>-->
 
 
-    <com.faiz.managesystem.CustomView.MyViewPager
+    <com.faiz.managesystem.customView.MyViewPager
         android:id="@+id/view_pager"
         android:layout_width="match_parent"
         android:layout_height="0dp"

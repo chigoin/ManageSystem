@@ -13,6 +13,7 @@
     <uses-permission android:name="android.permission.WAKE_LOCK"/>
 
     <application
+        android:name="org.litepal.LitePalApplication"
         android:networkSecurityConfig="@xml/network_security_cinfig"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"

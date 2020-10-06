@@ -5,13 +5,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.ViewPager;
 
 
+import android.bluetooth.BluetoothClass;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import com.faiz.managesystem.CustomView.MyViewPager;
+import com.faiz.managesystem.customView.MyViewPager;
 import com.faiz.managesystem.R;
 import com.faiz.managesystem.adapter.ViewPagerAdapter;
 import com.faiz.managesystem.fragment.BaseFragment;
+import com.faiz.managesystem.fragment.DeviceListFragment;
 import com.faiz.managesystem.fragment.MapFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -90,7 +92,8 @@ public class MainActivity extends AppCompatActivity {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         MapFragment mapFragment = new MapFragment();
         adapter.addFragment(mapFragment);
-        adapter.addFragment(BaseFragment.newInstance("设备列表"));
+        DeviceListFragment deviceListFragment = new DeviceListFragment();
+        adapter.addFragment(deviceListFragment);
         adapter.addFragment(BaseFragment.newInstance("我"));
         viewPager.setAdapter(adapter);
     }
