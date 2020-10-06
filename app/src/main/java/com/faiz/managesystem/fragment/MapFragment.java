@@ -2,14 +2,18 @@ package com.faiz.managesystem.fragment;
 
 
 import android.Manifest;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
 
@@ -19,19 +23,44 @@ import com.baidu.location.LocationClient;
 
 import com.baidu.location.LocationClientOption;
 import com.baidu.mapapi.SDKInitializer;
+import com.baidu.mapapi.map.BaiduMap;
+import com.baidu.mapapi.map.BitmapDescriptor;
+import com.baidu.mapapi.map.BitmapDescriptorFactory;
+import com.baidu.mapapi.map.MapStatusUpdate;
+import com.baidu.mapapi.map.MapStatusUpdateFactory;
 import com.baidu.mapapi.map.MapView;
+import com.baidu.mapapi.map.Marker;
+import com.baidu.mapapi.map.MarkerOptions;
+import com.baidu.mapapi.map.MyLocationData;
+import com.baidu.mapapi.map.OverlayOptions;
+import com.baidu.mapapi.model.LatLng;
 import com.faiz.managesystem.R;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 
 public class MapFragment extends BaseFragment {
 
-public LocationClient mLocationClient;
-private TextView tvPosition;
+    public LocationClient mLocationClient;
+    private MapView mapView;
 
-private MapView mapView;
+    private BaiduMap baiduMap;
+
+    private static final String TAG = "MapFragment";
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        Log.d(TAG, "onAttach:");
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        Log.d(TAG, "onCreate:");
+    }
 
     @Nullable
     @Override
@@ -40,13 +69,30 @@ private MapView mapView;
         mLocationClient = new LocationClient(getContext().getApplicationContext());
         mLocationClient.registerLocationListener(new MyLocationListener());
         View view = inflater.inflate(R.layout.fragment_map, container, false);
-        tvPosition = view.findViewById(R.id.tv_position);
         mapView = (MapView) view.findViewById(R.id.map_view);
+        baiduMap = mapView.getMap();
+        baiduMap.setMyLocationEnabled(true);
         return view;
+    }
+
+    //    导航至我的位置
+    private void navigateTo(BDLocation location) {
+        LatLng ll = new LatLng(location.getLatitude(), location.getLongitude());
+        MapStatusUpdate update = MapStatusUpdateFactory.newLatLng(ll);
+        baiduMap.animateMapStatus(update);
+        update = MapStatusUpdateFactory.zoomTo(16f);
+        baiduMap.animateMapStatus(update);
+
+        MyLocationData.Builder locationBuilder = new MyLocationData.Builder();
+        locationBuilder.latitude(location.getLatitude());
+        locationBuilder.longitude(location.getLongitude());
+        MyLocationData locationData = locationBuilder.build();
+        baiduMap.setMyLocationData(locationData);
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        Log.d(TAG, "onActivityCreated:");
         super.onActivityCreated(savedInstanceState);
         checkPermission();
     }
@@ -73,61 +119,109 @@ private MapView mapView;
         }
     }
 
-//    请求位置信息
-    private void requestLocation(){
-        initLocation();
+    //    请求位置信息
+    private void requestLocation() {
+        LocationSetting();
         mLocationClient.start();
     }
 
-//    实现百度地图的位置监听器
-    public class MyLocationListener implements BDLocationListener{
+    //    设置
+    private void LocationSetting() {
+        LocationClientOption option = new LocationClientOption();
+        option.setScanSpan(500);
+//        使用GPS
+        option.setLocationMode(LocationClientOption.LocationMode.Device_Sensors);
+//        是否显示地址
+        option.setIsNeedAddress(true);
+//        载入设置
+        mLocationClient.setLocOption(option);
+    }
+
+    //    实现百度地图的位置监听器
+    public class MyLocationListener implements BDLocationListener {
         @Override
         public void onReceiveLocation(BDLocation bdLocation) {
-            StringBuilder currentPositon = new StringBuilder();
-            currentPositon.append("纬度：").append(bdLocation.getLatitude()).append("\n");
-            currentPositon.append("经度：").append(bdLocation.getLongitude()).append("\n");
-//            Toast.makeText(MainActivity.this,,Toast.LENGTH_SHORT).show();
-            currentPositon.append("国家：").append(bdLocation.getCountry()).append("\n");
-            currentPositon.append("省：").append(bdLocation.getProvince()).append("\n");
-            currentPositon.append("市：").append(bdLocation.getCity()).append("\n");
-            currentPositon.append("区").append(bdLocation.getDistrict()).append("\n");
-            currentPositon.append("街道").append(bdLocation.getStreet()).append("\n");
-            currentPositon.append("定位方式：");
-            if (bdLocation.getLocType() == BDLocation.TypeGpsLocation) {
-                currentPositon.append("GPS");
-            } else if (bdLocation.getLocType() == BDLocation.TypeNetWorkLocation) {
-                currentPositon.append("网络");
+            if (bdLocation.getLocType() == BDLocation.TypeGpsLocation || bdLocation.getLocType() == BDLocation.TypeNetWorkLocation) {
+                navigateTo(bdLocation);
             }
-//            Toast.makeText(MainActivity.this, currentPositon.toString(), Toast.LENGTH_SHORT).show();
-            tvPosition.setText(currentPositon.toString());
         }
     }
 
-//    刷新当前位置
-    private void initLocation(){
-        LocationClientOption option = new LocationClientOption();
-        option.setScanSpan(5000);
-        option.setLocationMode(LocationClientOption.LocationMode.Device_Sensors);
-        option.setIsNeedAddress(true);
-        mLocationClient.setLocOption(option);
+
+/****************************************************/
+/**下面主要用于debug*/
+    /****************************************************/
+//请求权限的回调函数
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case 1: {
+                if (grantResults.length > 0) {
+                    for (int result : grantResults) {
+                        if (result != PackageManager.PERMISSION_GRANTED) {
+                            Toast.makeText(getContext(), "必须同意所有权限才能使用本程序", Toast.LENGTH_SHORT).show();
+                            getActivity().finish();
+                            return;
+                        }
+                    }
+                    requestLocation();
+                } else {
+                    Toast.makeText(getContext(), "发生未知错误", Toast.LENGTH_SHORT).show();
+                    getActivity().finish();
+                }
+                break;
+            }
+            default:
+        }
+    }
+
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        Log.d(TAG, "onStart:");
     }
 
     @Override
     public void onResume() {
         super.onResume();
         mapView.onResume();
+        Log.d(TAG, "onResume:");
     }
 
     @Override
     public void onPause() {
         super.onPause();
         mapView.onPause();
+        Log.d(TAG, "onPause:");
+        //mapView.onPause();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        Log.d(TAG, "onStop:");
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        Log.d(TAG, "onDestroyView:");
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
+        Log.d(TAG, "onDestroy:");
         mLocationClient.stop();
         mapView.onDestroy();
+        baiduMap.setMyLocationEnabled(false);
     }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        Log.d(TAG, "onDetach:");
+    }
+
 }

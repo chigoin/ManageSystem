@@ -8,7 +8,7 @@ import androidx.viewpager.widget.ViewPager;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import com.baidu.mapapi.SDKInitializer;
+import com.faiz.managesystem.CustomView.MyViewPager;
 import com.faiz.managesystem.R;
 import com.faiz.managesystem.adapter.ViewPagerAdapter;
 import com.faiz.managesystem.fragment.BaseFragment;
@@ -23,12 +23,13 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 public class MainActivity extends AppCompatActivity {
 
     //    tab栏控件
-    private ViewPager viewPager;
+    private MyViewPager viewPager;
     private MenuItem menuItem;
     private BottomNavigationView bottomNavigationView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+//        SDKInitializer.initialize(getApplicationContext());
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -39,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
     //    初始化底部tab栏
     private void initBottomNavigator() {
-        viewPager = (ViewPager) findViewById(R.id.view_pager);
+        viewPager = (MyViewPager) findViewById(R.id.view_pager);
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bnv);
         bottomNavigationView.setOnNavigationItemSelectedListener(
                 new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -93,5 +94,7 @@ public class MainActivity extends AppCompatActivity {
         adapter.addFragment(BaseFragment.newInstance("我"));
         viewPager.setAdapter(adapter);
     }
+
+
 
 }
