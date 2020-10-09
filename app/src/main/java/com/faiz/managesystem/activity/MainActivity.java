@@ -12,6 +12,7 @@ import android.view.MenuItem;
 import com.faiz.managesystem.customView.MyViewPager;
 import com.faiz.managesystem.R;
 import com.faiz.managesystem.adapter.ViewPagerAdapter;
+import com.faiz.managesystem.fragment.AccountFragment;
 import com.faiz.managesystem.fragment.BaseFragment;
 import com.faiz.managesystem.fragment.DeviceListFragment;
 import com.faiz.managesystem.fragment.MapFragment;
@@ -94,7 +95,8 @@ public class MainActivity extends AppCompatActivity {
         adapter.addFragment(mapFragment);
         DeviceListFragment deviceListFragment = new DeviceListFragment();
         adapter.addFragment(deviceListFragment);
-        adapter.addFragment(BaseFragment.newInstance("我"));
+        AccountFragment accountFragment = new AccountFragment();
+        adapter.addFragment(accountFragment);
         viewPager.setAdapter(adapter);
     }
 

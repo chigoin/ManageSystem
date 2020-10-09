@@ -52,7 +52,7 @@ public class DeviceListFragment extends BaseFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_device_list,container,false);
+        View view = inflater.inflate(R.layout.fragment_device_list, container, false);
         //        创建本地数据库
         LitePal.getDatabase();
 //        LitePal.deleteAll(Province.class);
@@ -173,6 +173,7 @@ public class DeviceListFragment extends BaseFragment {
             }
         });
     }
+
     //    TODO:定制一个progressDialog
     private void showProgressDialog() {
         if (progressDialog == null) {
