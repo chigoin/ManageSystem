@@ -6,6 +6,10 @@ import androidx.recyclerview.widget.SortedListAdapterCallback;
 import com.faiz.managesystem.model.Province;
 
 
+/**
+ * The type My sorted list callback.
+ * 这之后可能还需要对数据进行一下处理，将模型类更换为其他的类型
+ */
 public class MySortedListCallback extends SortedListAdapterCallback<Province> {
 
     public MySortedListCallback(RecyclerView.Adapter adapter) {

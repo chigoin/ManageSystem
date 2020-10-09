@@ -99,8 +99,7 @@ public class DeviceListFragment extends BaseFragment {
         initData();
         recyclerView.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false));
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.addItemDecoration(new DividerItemDecoration(context, DividerItemDecoration.VERTICAL));
-
+        //recyclerView.addItemDecoration(new DividerItemDecoration(context, DividerItemDecoration.VERTICAL));
         queryProvinces();
 
         adapter.setOnItemClickListener(new MyRecyclerViewAdapter.OnItemClickListener() {

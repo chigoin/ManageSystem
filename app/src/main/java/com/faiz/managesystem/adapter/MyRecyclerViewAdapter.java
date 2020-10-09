@@ -1,5 +1,6 @@
 package com.faiz.managesystem.adapter;
 
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -31,7 +32,8 @@ public class MyRecyclerViewAdapter extends RecyclerView.Adapter {
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View itemView = View.inflate(parent.getContext(), R.layout.item_device_list, null);
+//        View itemView = View.inflate(parent.getContext(), R.layout.item_device_list, null);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_device_list,parent,false);
         return new MyHolder(itemView);
     }
 

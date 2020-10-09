@@ -72,6 +72,7 @@ public class MapFragment extends BaseFragment {
         mapView = (MapView) view.findViewById(R.id.map_view);
         baiduMap = mapView.getMap();
         baiduMap.setMyLocationEnabled(true);
+        checkPermission();
         return view;
     }
 
@@ -94,7 +95,6 @@ public class MapFragment extends BaseFragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         Log.d(TAG, "onActivityCreated:");
         super.onActivityCreated(savedInstanceState);
-        checkPermission();
     }
 
     private void checkPermission() {
