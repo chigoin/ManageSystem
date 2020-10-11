@@ -14,17 +14,17 @@
     </item>
     <!-- 中心背景 -->
     <item>
-        <shape
-            android:shape="rectangle"
-            android:useLevel="false">
-            <!-- 实心 -->
-            <solid android:color="#ffffff" />
-            <corners android:radius="10dp" />
-            <padding
-                android:bottom="10dp"
-                android:left="10dp"
-                android:right="10dp"
-                android:top="10dp" />
-        </shape>
-    </item>
+    <shape
+        android:shape="rectangle"
+        android:useLevel="false">
+        <!-- 实心 -->
+        <solid android:color="#ffffff" />
+        <corners android:radius="10dp" />
+        <padding
+            android:bottom="10dp"
+            android:left="10dp"
+            android:right="10dp"
+            android:top="10dp" />
+    </shape>
+</item>
 </layer-list>

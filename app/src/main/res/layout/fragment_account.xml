@@ -257,4 +257,17 @@
             </RelativeLayout>
         </LinearLayout>
     </androidx.cardview.widget.CardView>
+
+    <com.google.android.material.button.MaterialButton
+        android:layout_marginTop="40dp"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_marginLeft="18dp"
+        android:layout_marginRight="18dp"
+        android:text="退出登录"
+        android:textSize="20dp"
+        app:backgroundTint="#F44336"
+        app:cornerRadius="10dp"
+        />
+
 </LinearLayout>

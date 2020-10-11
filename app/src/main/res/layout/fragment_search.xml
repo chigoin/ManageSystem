@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    <fragment
+        android:layout_marginTop="?attr/actionBarSize"
+        android:id="@+id/fragment_device_list"
+        android:name="com.faiz.managesystem.fragment.DeviceListFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <com.arlib.floatingsearchview.FloatingSearchView
+        android:id="@+id/floating_search_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:floatingSearch_dismissOnOutsideTouch="true"
+        app:floatingSearch_leftActionMode="showHamburger"
+        app:floatingSearch_menu="@menu/bottom_navigation_tab"
+        app:floatingSearch_searchHint="Search..."
+        app:floatingSearch_showSearchKey="true"
+        app:floatingSearch_suggestionsListAnimDuration="250"
+        app:floatingSearch_dimBackground="false"
+        app:floatingSearch_close_search_on_keyboard_dismiss="false" />
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+</LinearLayout>

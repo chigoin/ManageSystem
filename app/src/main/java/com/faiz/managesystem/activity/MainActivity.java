@@ -16,7 +16,10 @@ import com.faiz.managesystem.fragment.AccountFragment;
 import com.faiz.managesystem.fragment.BaseFragment;
 import com.faiz.managesystem.fragment.DeviceListFragment;
 import com.faiz.managesystem.fragment.MapFragment;
+import com.faiz.managesystem.fragment.SearchFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import java.security.SecureRandom;
 
 
 /**
@@ -93,7 +96,9 @@ public class MainActivity extends AppCompatActivity {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         MapFragment mapFragment = new MapFragment();
         adapter.addFragment(mapFragment);
-        DeviceListFragment deviceListFragment = new DeviceListFragment();
+//        DeviceListFragment deviceListFragment = new DeviceListFragment();
+//        adapter.addFragment(deviceListFragment);
+        SearchFragment deviceListFragment = new SearchFragment();
         adapter.addFragment(deviceListFragment);
         AccountFragment accountFragment = new AccountFragment();
         adapter.addFragment(accountFragment);

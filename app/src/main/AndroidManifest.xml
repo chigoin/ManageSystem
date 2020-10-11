@@ -33,7 +33,8 @@
             android:name="com.baidu.lbsapi.API_KEY"
             android:value="DfcLGMgrl7D6FMreQWVoQYexyQxFERlA" />
 
-        <activity android:name=".activity.MainActivity">
+        <activity android:name=".activity.MainActivity"
+            android:windowSoftInputMode="adjustPan" >
 
         </activity>
 
