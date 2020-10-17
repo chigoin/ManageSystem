@@ -13,13 +13,11 @@ import com.faiz.managesystem.customView.MyViewPager;
 import com.faiz.managesystem.R;
 import com.faiz.managesystem.adapter.ViewPagerAdapter;
 import com.faiz.managesystem.fragment.AccountFragment;
-import com.faiz.managesystem.fragment.BaseFragment;
-import com.faiz.managesystem.fragment.DeviceListFragment;
+
 import com.faiz.managesystem.fragment.MapFragment;
 import com.faiz.managesystem.fragment.SearchFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import java.security.SecureRandom;
 
 
 /**

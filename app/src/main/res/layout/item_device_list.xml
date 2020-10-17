@@ -13,7 +13,7 @@
         android:id="@+id/tv_index"
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:layout_marginLeft="25dp"
+        android:layout_marginLeft="30dp"
         android:layout_marginTop="5dp"
         android:background="@drawable/shape_circle_index"
         android:gravity="center"

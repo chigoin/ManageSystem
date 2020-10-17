@@ -23,6 +23,7 @@ import com.faiz.managesystem.util.SearchHelper;
 
 import java.util.List;
 
+
 public class SearchFragment extends BaseFragment {
 
     private FloatingSearchView searchView;
@@ -45,7 +46,8 @@ public class SearchFragment extends BaseFragment {
         setupFloatingSearch();
     }
 
-    private void setupFloatingSearch() {
+
+  private void setupFloatingSearch() {
 //    为搜索框添加文本该改变监听事件
         searchView.setOnQueryChangeListener(new FloatingSearchView.OnQueryChangeListener() {
             @Override

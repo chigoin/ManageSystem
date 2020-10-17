@@ -72,6 +72,13 @@ public class DeviceListFragment extends BaseFragment {
 
 
     private void initWaveSideBar() {
+
+        waveSideBar.setIndexItems("A", "B", "C", "D", "E",
+                "F", "G", "H", "I", "J", "K",
+                "L", "M", "N", "O", "P", "Q",
+                "R", "S", "T", "U", "V", "W",
+                "X", "Y", "Z", "#");
+
         waveSideBar.setTextColor(Color.BLACK);
         waveSideBar.setMaxOffset(200);//字母偏移量
         waveSideBar.setPosition(WaveSideBar.POSITION_RIGHT);//侧边栏在左边还是右边
