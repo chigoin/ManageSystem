@@ -72,8 +72,10 @@ public class SearchFragment extends BaseFragment {
         searchView.setOnSearchListener(new FloatingSearchView.OnSearchListener() {
             @Override
             public void onSuggestionClicked(final SearchSuggestion searchSuggestion) {
-                lastQuery = searchSuggestion.getBody();
-                Toast.makeText(getContext(), lastQuery, Toast.LENGTH_SHORT).show();
+                Province province = new Province();
+                province.setHistory(true);
+                province.updateAll("provinceName = ?", searchSuggestion.getBody());
+                Toast.makeText(getContext(), searchSuggestion.getBody(), Toast.LENGTH_SHORT).show();
             }
 
             @Override
@@ -89,20 +91,14 @@ public class SearchFragment extends BaseFragment {
             @Override
             public void onFocus() {
                 searchView.swapSuggestions(SearchHelper.getHistory(3));
-//                @Override
-//                public void onAnimationEnd(Animator animation) {
-//                    // 展示历史搜索项
-//
-//
-//                }
+
             }
 
             @Override
             public void onFocusCleared() {
 //                searchView.setSearchBarTitle(lastQuery);
-
-                //你也可以将已经打上的搜索字符保存，以致在下一次点击的时候，搜索栏内还保存着之前输入的字符
-                //mSearchView.setSearchText(searchSuggestion.getBody());
+//                你也可以将已经打上的搜索字符保存，以致在下一次点击的时候，搜索栏内还保存着之前输入的字符
+//                mSearchView.setSearchText(searchSuggestion.getBody());
 
             }
         });
@@ -114,8 +110,8 @@ public class SearchFragment extends BaseFragment {
                                          TextView textView, SearchSuggestion item, int itemPosition) {
                 Province provinceSuggestion = (Province) item;
 
-                String textColor = mIsDarkSearchTheme ? "#ffffff" : "#000000";
-                String textLight = mIsDarkSearchTheme ? "#bfbfbf" : "#787878";
+                String textColor = mIsDarkSearchTheme ? "#ffffff" : "#787878";
+                String textLight = mIsDarkSearchTheme ? "#bfbfbf" : "#03A9F4";
 
                 if (provinceSuggestion.isHistory()) {
                     leftIcon.setImageDrawable(ResourcesCompat.getDrawable(getResources(),
