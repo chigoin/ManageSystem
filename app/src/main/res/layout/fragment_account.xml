@@ -23,7 +23,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/item_selector"
+                android:background="?android:attr/selectableItemBackground"
                 android:clickable="true"
                 android:paddingLeft="10dp"
                 android:paddingTop="10dp"
@@ -62,7 +62,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/item_selector"
+                android:background="?android:attr/selectableItemBackground"
                 android:clickable="true"
                 android:paddingLeft="10dp"
                 android:paddingTop="10dp"
@@ -111,7 +111,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/item_selector"
+                android:background="?android:attr/selectableItemBackground"
                 android:clickable="true"
                 android:paddingLeft="10dp"
                 android:paddingTop="10dp"
@@ -150,7 +150,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/item_selector"
+                android:background="?android:attr/selectableItemBackground"
                 android:clickable="true"
                 android:paddingLeft="10dp"
                 android:paddingTop="10dp"
@@ -188,7 +188,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/item_selector"
+                android:background="?android:attr/selectableItemBackground"
                 android:clickable="true"
                 android:paddingLeft="10dp"
                 android:paddingTop="10dp"
@@ -226,7 +226,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@drawable/item_selector"
+                android:background="?android:attr/selectableItemBackground"
                 android:clickable="true"
                 android:paddingLeft="10dp"
                 android:paddingTop="10dp"
@@ -259,6 +259,7 @@
     </androidx.cardview.widget.CardView>
 
     <com.google.android.material.button.MaterialButton
+        android:id="@+id/btn_logout"
         android:layout_marginTop="40dp"
         android:layout_width="match_parent"
         android:layout_height="55dp"

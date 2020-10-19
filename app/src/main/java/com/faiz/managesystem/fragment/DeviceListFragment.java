@@ -16,11 +16,13 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SortedList;
 
+import com.faiz.managesystem.Dialog.CustomProgressDialog;
 import com.faiz.managesystem.R;
 import com.faiz.managesystem.adapter.MyRecyclerViewAdapter;
 import com.faiz.managesystem.adapter.MySortedListCallback;
 import com.faiz.managesystem.model.Province;
 import com.faiz.managesystem.util.HttpUtil;
+import com.faiz.managesystem.util.ProgressDialogUtil;
 import com.faiz.managesystem.util.ResponseUtil;
 import com.gjiazhe.wavesidebar.WaveSideBar;
 
@@ -45,7 +47,9 @@ public class DeviceListFragment extends BaseFragment {
     //    用于批量获取从数据库中得到的数据
     private List<Province> provinceList;
     //    progressDialog
-    private ProgressDialog progressDialog;
+    //private ProgressDialog progressDialog;
+
+//    private CustomProgressDialog progressDialog;
 
     private MyRecyclerViewAdapter adapter;
 
@@ -143,14 +147,14 @@ public class DeviceListFragment extends BaseFragment {
     }
 
     private void queryFromServer(String address) {
-        showProgressDialog();
+        ProgressDialogUtil.showProgressDialog(context);
         HttpUtil.sendOkHttpRequest(address, new Callback() {
             @Override
             public void onFailure(@NotNull Call call, @NotNull IOException e) {
                 getActivity().runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        closeProgressDialog();
+                        ProgressDialogUtil.closeProgressDialog();
                         Toast.makeText(context, "加载失败", Toast.LENGTH_SHORT).show();
                     }
                 });
@@ -165,7 +169,7 @@ public class DeviceListFragment extends BaseFragment {
                         @Override
                         public void run() {
                             queryProvinces();
-                            closeProgressDialog();
+                            ProgressDialogUtil.closeProgressDialog();
                         }
                     });
                 } else {
@@ -181,21 +185,19 @@ public class DeviceListFragment extends BaseFragment {
         });
     }
 
-    //    TODO:定制一个progressDialog
-    private void showProgressDialog() {
-        if (progressDialog == null) {
-            progressDialog = new ProgressDialog(context);
-            progressDialog.setMessage("正在加载...");
-            progressDialog.setCanceledOnTouchOutside(false);
-        }
-        progressDialog.show();
-    }
-
-    private void closeProgressDialog() {
-        if (progressDialog != null) {
-            progressDialog.dismiss();
-        }
-    }
+//    //    TODO:定制一个progressDialog
+//    private void showProgressDialog() {
+//        if (progressDialog == null) {
+//            progressDialog = new CustomProgressDialog(context, "加载中...");
+//        }
+//        progressDialog.show();
+//    }
+//
+//    private void closeProgressDialog() {
+//        if (progressDialog != null) {
+//            progressDialog.dismiss();
+//        }
+//    }
 
 
 }
